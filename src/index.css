@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.calendar-day {
+  @apply relative bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg p-2 cursor-pointer transition-all duration-200 hover:shadow-md hover:border-orange-400 dark:hover:border-orange-500 flex flex-col;
+}
+
+.calendar-day.today {
+  @apply ring-2 ring-orange-500 dark:ring-orange-400 bg-orange-50 dark:bg-orange-900/20;
+}
+
+.calendar-day.saturday {
+  @apply bg-red-50 dark:bg-red-900/10;
+}
+
+.calendar-day.holiday {
+  @apply bg-red-100 dark:bg-red-900/20 border-red-300 dark:border-red-700;
+}
+
+.main-number {
+  @apply text-xl font-bold text-gray-900 dark:text-white text-center mb-auto;
+}
+
+.sub-number {
+  @apply absolute top-1 right-1 text-xs text-gray-500 dark:text-gray-300 font-medium;
+}
+
+.tithi-display {
+  @apply text-[10px] text-gray-600 dark:text-gray-200 mt-auto text-left font-medium leading-tight;
+}
+
+.tithi-display.special {
+  @apply font-semibold;
+}
+
+.tithi-display.purnima {
+  @apply text-yellow-700 dark:text-yellow-400;
+}
+
+.tithi-display.amavasya {
+  @apply text-purple-700 dark:text-purple-400;
+}
+
+.event-dot {
+  @apply absolute bottom-2 right-2 w-2 h-2 bg-orange-500 dark:bg-orange-400 rounded-full;
+}
+
+.weekday {
+  @apply text-center font-semibold text-xs uppercase py-1;
+}

@@ -1,0 +1,108 @@
+import React from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { toDevanagari, fromDevanagari } from '../lib/bikramCalculations';
+
+interface CalendarControlsProps {
+    activeSystem: 'bs' | 'ad';
+    currentYear: number;
+    currentMonth: number;
+    onYearChange: (year: number) => void;
+    onMonthChange: (month: number) => void;
+    onPrevMonth: () => void;
+    onNextMonth: () => void;
+    onPrevYear: () => void;
+    onNextYear: () => void;
+}
+
+const BIKRAM_SAMBAT_MONTHS = ["वैशाख", "जेठ", "असार", "साउन", "भदौ", "असोज", "कार्तिक", "मंसिर", "पुष", "माघ", "फाल्गुन", "चैत"];
+const GREGORIAN_MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+const CalendarControls: React.FC<CalendarControlsProps> = ({
+    activeSystem,
+    currentYear,
+    currentMonth,
+    onYearChange,
+    onMonthChange,
+    onPrevMonth,
+    onNextMonth,
+    onPrevYear,
+    onNextYear
+}) => {
+    const months = activeSystem === 'bs' ? BIKRAM_SAMBAT_MONTHS : GREGORIAN_MONTHS;
+
+    const handleYearInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (activeSystem === 'bs') {
+            const devanagariValue = e.target.value;
+            const englishValue = fromDevanagari(devanagariValue);
+            const sanitizedEnglish = englishValue.replace(/[^0-9]/g, '');
+            const year = parseInt(sanitizedEnglish) || currentYear;
+            onYearChange(year);
+        } else {
+            const year = parseInt(e.target.value) || currentYear;
+            onYearChange(year);
+        }
+    };
+
+    return (
+        <div className="flex items-center justify-between p-2 bg-gray-50 dark:bg-gray-700/50 flex-shrink-0">
+            <div className="flex items-center gap-2 sm:gap-3">
+                <button
+                    onClick={onPrevYear}
+                    className="p-2 rounded-lg bg-white dark:bg-gray-700 shadow-sm hover:shadow-md transition-all duration-200 text-gray-600 dark:text-gray-300 hover:text-orange-500"
+                >
+                    <ChevronLeft size={16} />
+                    <ChevronLeft size={16} className="-ml-2" />
+                </button>
+                <button
+                    onClick={onPrevMonth}
+                    className="p-2 rounded-lg bg-white dark:bg-gray-700 shadow-sm hover:shadow-md transition-all duration-200 text-gray-600 dark:text-gray-300 hover:text-orange-500"
+                >
+                    <ChevronLeft size={16} />
+                </button>
+            </div>
+
+            <div className="flex items-center gap-3 sm:gap-4">
+                <select
+                    value={currentMonth}
+                    onChange={(e) => onMonthChange(parseInt(e.target.value))}
+                    className="px-3 py-2 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm dark:text-gray-100"
+                    style={activeSystem === 'bs' ? { fontFamily: "'Noto Sans Devanagari', sans-serif" } : {}}
+                >
+                    {months.map((month, index) => (
+                        <option key={index} value={index}>
+                            {month}
+                        </option>
+                    ))}
+                </select>
+                
+                <input
+                    type={activeSystem === 'bs' ? 'text' : 'number'}
+                    value={activeSystem === 'bs' ? toDevanagari(currentYear) : currentYear}
+                    onChange={handleYearInputChange}
+                    className="w-20 px-3 py-2 text-center bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm dark:text-gray-100"
+                    style={activeSystem === 'bs' ? { fontFamily: "'Noto Sans Devanagari', sans-serif" } : {}}
+                    min={activeSystem === 'bs' ? 2000 : 1944}
+                    max={activeSystem === 'bs' ? 2089 : 2043}
+                />
+            </div>
+
+            <div className="flex items-center gap-2 sm:gap-3">
+                <button
+                    onClick={onNextMonth}
+                    className="p-2 rounded-lg bg-white dark:bg-gray-700 shadow-sm hover:shadow-md transition-all duration-200 text-gray-600 dark:text-gray-300 hover:text-orange-500"
+                >
+                    <ChevronRight size={16} />
+                </button>
+                <button
+                    onClick={onNextYear}
+                    className="p-2 rounded-lg bg-white dark:bg-gray-700 shadow-sm hover:shadow-md transition-all duration-200 text-gray-600 dark:text-gray-300 hover:text-orange-500"
+                >
+                    <ChevronRight size={16} />
+                    <ChevronRight size={16} className="-ml-2" />
+                </button>
+            </div>
+        </div>
+    );
+};
+
+export default CalendarControls;
