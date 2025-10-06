@@ -44,18 +44,18 @@ const CalendarControls: React.FC<CalendarControlsProps> = ({
     };
 
     return (
-        <div className="flex items-center justify-between p-2 bg-gray-50 dark:bg-gray-700/50 flex-shrink-0">
+        <div className="flex items-center justify-between p-2 bg-white dark:bg-gray-700/50 flex-shrink-0">
             <div className="flex items-center gap-2 sm:gap-3">
                 <button
                     onClick={onPrevYear}
-                    className="p-2 rounded-lg bg-white dark:bg-gray-700 shadow-sm hover:shadow-md transition-all duration-200 text-gray-600 dark:text-gray-300 hover:text-orange-500"
+                    className="p-2 rounded-lg bg-blue-500 dark:bg-gray-700 shadow-sm hover:shadow-md transition-all duration-200 text-white dark:text-gray-300 hover:bg-blue-600 dark:hover:text-blue-400"
                 >
                     <ChevronLeft size={16} />
                     <ChevronLeft size={16} className="-ml-2" />
                 </button>
                 <button
                     onClick={onPrevMonth}
-                    className="p-2 rounded-lg bg-white dark:bg-gray-700 shadow-sm hover:shadow-md transition-all duration-200 text-gray-600 dark:text-gray-300 hover:text-orange-500"
+                    className="p-2 rounded-lg bg-blue-500 dark:bg-gray-700 shadow-sm hover:shadow-md transition-all duration-200 text-white dark:text-gray-300 hover:bg-blue-600 dark:hover:text-blue-400"
                 >
                     <ChevronLeft size={16} />
                 </button>
@@ -65,7 +65,7 @@ const CalendarControls: React.FC<CalendarControlsProps> = ({
                 <select
                     value={currentMonth}
                     onChange={(e) => onMonthChange(parseInt(e.target.value))}
-                    className="px-3 py-2 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm dark:text-gray-100"
+                    className="px-3 py-2 bg-white dark:bg-gray-700 border border-blue-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm text-blue-900 dark:text-gray-100"
                     style={activeSystem === 'bs' ? { fontFamily: "'Noto Sans Devanagari', sans-serif" } : {}}
                 >
                     {months.map((month, index) => (
@@ -79,7 +79,7 @@ const CalendarControls: React.FC<CalendarControlsProps> = ({
                     type={activeSystem === 'bs' ? 'text' : 'number'}
                     value={activeSystem === 'bs' ? toDevanagari(currentYear) : currentYear}
                     onChange={handleYearInputChange}
-                    className="w-20 px-3 py-2 text-center bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm dark:text-gray-100"
+                    className="w-20 px-3 py-2 text-center bg-white dark:bg-gray-700 border border-blue-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm text-blue-900 dark:text-gray-100"
                     style={activeSystem === 'bs' ? { fontFamily: "'Noto Sans Devanagari', sans-serif" } : {}}
                     min={activeSystem === 'bs' ? 2000 : 1944}
                     max={activeSystem === 'bs' ? 2089 : 2043}
@@ -89,13 +89,13 @@ const CalendarControls: React.FC<CalendarControlsProps> = ({
             <div className="flex items-center gap-2 sm:gap-3">
                 <button
                     onClick={onNextMonth}
-                    className="p-2 rounded-lg bg-white dark:bg-gray-700 shadow-sm hover:shadow-md transition-all duration-200 text-gray-600 dark:text-gray-300 hover:text-orange-500"
+                    className="p-2 rounded-lg bg-blue-500 dark:bg-gray-700 shadow-sm hover:shadow-md transition-all duration-200 text-white dark:text-gray-300 hover:bg-blue-600 dark:hover:text-blue-400"
                 >
                     <ChevronRight size={16} />
                 </button>
                 <button
                     onClick={onNextYear}
-                    className="p-2 rounded-lg bg-white dark:bg-gray-700 shadow-sm hover:shadow-md transition-all duration-200 text-gray-600 dark:text-gray-300 hover:text-orange-500"
+                    className="p-2 rounded-lg bg-blue-500 dark:bg-gray-700 shadow-sm hover:shadow-md transition-all duration-200 text-white dark:text-gray-300 hover:bg-blue-600 dark:hover:text-blue-400"
                 >
                     <ChevronRight size={16} />
                     <ChevronRight size={16} className="-ml-2" />

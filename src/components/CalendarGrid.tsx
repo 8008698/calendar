@@ -166,10 +166,10 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({
             {/* Weekdays Header */}
             <div className="grid grid-cols-7 gap-1 mb-1 flex-shrink-0">
                 {weekdays.map((day, index) => (
-                    <div 
-                        key={day} 
+                    <div
+                        key={day}
                         className={`weekday ${
-                            index === 6 ? 'text-red-500 dark:text-red-400' : 'text-gray-600 dark:text-gray-400'
+                            index === 6 ? 'bg-red-600 dark:bg-red-800' : 'bg-blue-600 dark:bg-gray-700'
                         }`}
                         style={activeSystem === 'bs' ? { fontFamily: "'Noto Sans Devanagari', sans-serif" } : {}}
                     >

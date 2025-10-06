@@ -116,7 +116,7 @@ function App() {
     const currentMonth = activeSystem === 'bs' ? currentBsMonth : currentAdMonth;
 
     return (
-        <div className="h-screen bg-gradient-to-br from-orange-50 via-red-50 to-yellow-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-colors duration-300 flex flex-col overflow-hidden">
+        <div className="h-screen bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-colors duration-300 flex flex-col overflow-hidden">
             <div className="w-full max-w-7xl mx-auto flex-1 flex flex-col min-h-0 px-2 sm:px-4 lg:px-6 xl:px-8 overflow-hidden">
                 <CalendarHeader
                     activeSystem={activeSystem}
