@@ -7,11 +7,11 @@
 }
 
 .calendar-day.today {
-  @apply ring-2 ring-blue-500 dark:ring-blue-400 bg-blue-50 dark:bg-blue-900/20;
+  @apply ring-2 ring-blue-500 dark:ring-blue-400 bg-yellow-50/50 dark:bg-blue-900/20;
 }
 
 .calendar-day.saturday {
-  @apply bg-red-50 dark:bg-red-900/10 border-red-200 dark:border-red-800;
+  @apply bg-red-50/30 dark:bg-red-900/10 border-red-200 dark:border-red-800;
 }
 
 .calendar-day.saturday .main-number {
@@ -19,7 +19,7 @@
 }
 
 .calendar-day.holiday {
-  @apply bg-red-100 dark:bg-red-900/20 border-red-300 dark:border-red-700;
+  @apply border-orange-400 dark:border-orange-500;
 }
 
 .main-number {
