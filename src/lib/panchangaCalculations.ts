@@ -92,29 +92,22 @@ function findPurnima(ahar: number): number {
 }
 
 function calculateAdhikaMasa(ahar: number): string {
-    const lunarMonthStart = findNewMoon(ahar);
-    const lunarMonthEnd = findNewMoon(lunarMonthStart + 29.530588853);
-    const startSign = Math.floor(trueLongitudeSun(lunarMonthStart) / 30);
-    const endSign = Math.floor(trueLongitudeSun(lunarMonthEnd) / 30);
-
-    let signCrossings = 0;
-    let currentSign = startSign;
-    for (let i = 1; i <= 30; i++) {
-        const checkAhar = lunarMonthStart + i;
-        if (checkAhar >= lunarMonthEnd) break;
-        const checkSunLong = trueLongitudeSun(checkAhar);
-        let checkSign = Math.floor(checkSunLong / 30);
-        if (checkSign < currentSign) { checkSign += 12; }
-        if (checkSign > currentSign) {
-            signCrossings += (checkSign - currentSign);
-            currentSign = checkSign % 12;
-        }
+    let lunarMonthStart = findNewMoon(ahar);
+    if (lunarMonthStart > ahar) {
+        lunarMonthStart = findNewMoon(lunarMonthStart - 29.530588853);
     }
+    const lunarMonthEnd = findNewMoon(lunarMonthStart + 29.530588853);
+    const sunLongStart = trueLongitudeSun(lunarMonthStart);
+    const sunLongEnd = trueLongitudeSun(lunarMonthEnd);
+    let startSign = Math.floor(sunLongStart / 30);
+    let endSign = Math.floor(sunLongEnd / 30);
 
-    if (signCrossings === 0) {
+    if (endSign < startSign) endSign += 12;
+
+    if (endSign === startSign) {
         return "अधिक " + solarMonths[startSign % 12];
     }
-    if (signCrossings >= 2) {
+    if (endSign > startSign + 1) {
         const skippedSign = (startSign + 1) % 12;
         return "क्षय " + solarMonths[skippedSign];
     }
@@ -122,9 +115,12 @@ function calculateAdhikaMasa(ahar: number): string {
 }
 
 function getLunarMonthNameWithAdhik(ahar: number): { monthName: string; isAdhika: boolean } {
-    const endingPurnima = findPurnima(ahar);
-    const sunLongAtPurnima = trueLongitudeSun(endingPurnima);
-    const nameSign = Math.floor(sunLongAtPurnima / 30);
+    let lunarMonthStart = findNewMoon(ahar);
+    if (lunarMonthStart > ahar) {
+        lunarMonthStart = findNewMoon(lunarMonthStart - 29.53);
+    }
+    const sunLongAtAmavasya = trueLongitudeSun(lunarMonthStart);
+    const nameSign = Math.floor(sunLongAtAmavasya / 30);
     const monthName = solarMonths[nameSign];
     const adhikaStatus = calculateAdhikaMasa(ahar);
     const isAdhika = adhikaStatus.startsWith("अधिक");
@@ -266,7 +262,7 @@ export function getEventsForDate(date: Date, bsYear: number, bsMonthIndex: numbe
 
 export function calculate(date: Date, lat?: number, lon?: number, tz?: number) {
     const cacheKey = "panchanga_" + date.getTime();
-    
+
     const jd = toJulianDay(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
     const ahar = jd - KaliEpoch + 0.25 + (((lon || 85.3240) / 15 - (tz || 5.75)) / 24);
     const sunLong = trueLongitudeSun(ahar);
@@ -278,16 +274,27 @@ export function calculate(date: Date, lat?: number, lon?: number, tz?: number) {
     const tithiDay = tithiNum > 15 ? tithiNum - 15 : tithiNum;
     const tithiName = resolveTithiName(tithiDay, paksha);
 
+    let purnima_end_of_month = findPurnima(ahar);
+    if (purnima_end_of_month < ahar) {
+        purnima_end_of_month = findPurnima(ahar + 29.53);
+    }
+
+    const sunLongAtPurnima = trueLongitudeSun(purnima_end_of_month);
+    const nameSign = Math.floor(sunLongAtPurnima / 30);
+    const purnimantaMonthName = solarMonths[nameSign];
+
+    const adhikaMasaStatus = calculateAdhikaMasa(ahar);
+    const isAdhika = adhikaMasaStatus.startsWith("अधिक");
+
     const karanaIdx = Math.floor(2 * tithiVal);
     const karanaName = karanaIdx > 0 ? (karanaIdx < 57 ? karanas[(karanaIdx-1) % 7 + 1] : karanas[karanaIdx - 57 + 8]) : karanas[0];
 
     const bsInfo = toBikramSambat(date);
     if (!bsInfo) return { error: "Date out of range" };
 
-    const lunarMonthInfo = getLunarMonthNameWithAdhik(ahar);
+    const lunarMonthDisplayName = isAdhika ? "अधिक " + purnimantaMonthName : purnimantaMonthName;
     const events = getEventsForDate(date, bsInfo.year, bsInfo.monthIndex, bsInfo.day);
     const sunriseSunset = getSunriseSunset(date, lat, lon, tz);
-    const lunarMonthDisplayName = lunarMonthInfo.isAdhika ? "अधिक " + lunarMonthInfo.monthName : lunarMonthInfo.monthName;
 
     const gregorianOptions: Intl.DateTimeFormatOptions = { 
         weekday: 'long', 
@@ -318,6 +325,6 @@ export function calculate(date: Date, lat?: number, lon?: number, tz?: number) {
         moonRashi: rashis[Math.floor(moonLong / 30)],
         events: events,
         isComputed: bsInfo.isComputed,
-        adhikaMasa: lunarMonthInfo.isAdhika ? "अधिक " + lunarMonthInfo.monthName : "छैन"
+        adhikaMasa: adhikaMasaStatus
     };
 }
