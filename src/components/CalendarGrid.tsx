@@ -102,26 +102,26 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({
     };
 
     const renderGregorianCalendar = () => {
-        const firstDay = new Date(currentYear, currentMonth, 1);
-        const lastDay = new Date(currentYear, currentMonth + 1, 0);
+        const firstDay = new Date(Date.UTC(currentYear, currentMonth, 1));
+        const lastDay = new Date(Date.UTC(currentYear, currentMonth + 1, 0));
         const cells = [];
 
         // Empty cells at the beginning
-        for (let i = 0; i < firstDay.getDay(); i++) {
+        for (let i = 0; i < firstDay.getUTCDay(); i++) {
             cells.push(
                 <div key={`empty-${i}`} className="h-full bg-transparent" />
             );
         }
 
         // Days of the month
-        for (let day = 1; day <= lastDay.getDate(); day++) {
-            const date = new Date(currentYear, currentMonth, day);
+        for (let day = 1; day <= lastDay.getUTCDate(); day++) {
+            const date = new Date(Date.UTC(currentYear, currentMonth, day));
             const bsDate = toBikramSambat(date);
             const panchanga = _getPanchangaBasics(date);
             const events = getEventsForDate(date, bsDate.year, bsDate.monthIndex, bsDate.day);
 
             let classes = 'calendar-day';
-            if (date.getDay() === 6) classes += ' saturday';
+            if (date.getUTCDay() === 6) classes += ' saturday';
             if (date.toDateString() === today.toDateString()) classes += ' today';
             
             const isHoliday = events.some(event => event.holiday);
