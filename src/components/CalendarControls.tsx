@@ -44,7 +44,7 @@ const CalendarControls: React.FC<CalendarControlsProps> = ({
     };
 
     return (
-        <div className="flex items-center justify-between p-2 bg-white dark:bg-gray-700/50 flex-shrink-0">
+        <div className="flex items-center justify-between p-1.5 sm:p-2 bg-white dark:bg-gray-700/50 flex-shrink-0">
             <div className="flex items-center gap-2 sm:gap-3">
                 <button
                     onClick={onPrevYear}

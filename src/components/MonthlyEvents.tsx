@@ -74,7 +74,7 @@ const MonthlyEvents: React.FC<MonthlyEventsProps> = ({
     });
 
     return (
-        <div className="bg-white dark:bg-gray-800 rounded-lg border border-blue-200 dark:border-gray-700 px-3 py-2 flex-shrink-0">
+        <div className="bg-white dark:bg-gray-800 rounded-lg border border-blue-200 dark:border-gray-700 px-3 py-1.5 flex-shrink-0">
             <div
                 className="text-xs text-blue-800 dark:text-gray-300 flex flex-wrap gap-x-3 gap-y-1"
                 style={{ fontFamily: "'Noto Sans Devanagari', sans-serif" }}

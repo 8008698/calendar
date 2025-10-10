@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sun, Moon } from 'lucide-react';
+import { Sun, Moon, Menu } from 'lucide-react';
 
 interface CalendarHeaderProps {
     activeSystem: 'bs' | 'ad';
@@ -7,6 +7,7 @@ interface CalendarHeaderProps {
     onTodayClick: () => void;
     theme: 'light' | 'dark';
     onThemeToggle: () => void;
+    onMenuClick: () => void;
 }
 
 const CalendarHeader: React.FC<CalendarHeaderProps> = ({
@@ -14,7 +15,8 @@ const CalendarHeader: React.FC<CalendarHeaderProps> = ({
     onSystemChange,
     onTodayClick,
     theme,
-    onThemeToggle
+    onThemeToggle,
+    onMenuClick
 }) => {
     return (
         <header className="flex items-center justify-between p-3 bg-blue-600 dark:bg-gray-800 backdrop-blur-sm border-b border-blue-700 dark:border-gray-700 flex-shrink-0">
@@ -53,12 +55,20 @@ const CalendarHeader: React.FC<CalendarHeaderProps> = ({
                 </button>
             </div>
 
-            <button
-                onClick={onThemeToggle}
-                className="p-2.5 rounded-lg bg-white/90 dark:bg-gray-700 text-blue-600 dark:text-gray-300 hover:text-blue-700 dark:hover:text-blue-400 transition-colors duration-200"
-            >
-                {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
-            </button>
+            <div className="flex items-center gap-2">
+                <button
+                    onClick={onMenuClick}
+                    className="p-2.5 rounded-lg bg-white/90 dark:bg-gray-700 text-blue-600 dark:text-gray-300 hover:text-blue-700 dark:hover:text-blue-400 transition-colors duration-200"
+                >
+                    <Menu size={18} />
+                </button>
+                <button
+                    onClick={onThemeToggle}
+                    className="p-2.5 rounded-lg bg-white/90 dark:bg-gray-700 text-blue-600 dark:text-gray-300 hover:text-blue-700 dark:hover:text-blue-400 transition-colors duration-200"
+                >
+                    {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
+                </button>
+            </div>
         </header>
     );
 };
