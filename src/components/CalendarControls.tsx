@@ -53,7 +53,6 @@ const CalendarControls: React.FC<CalendarControlsProps> = ({
                     className="p-2 rounded-lg transition-colors duration-200 text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
                 >
                     <ChevronLeft size={20} />
-                    <ChevronLeft size={20} className="-ml-3" />
                 </button>
                 <button
                     onClick={onPrevMonth}
@@ -108,7 +107,6 @@ const CalendarControls: React.FC<CalendarControlsProps> = ({
                     className="p-2 rounded-lg transition-colors duration-200 text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
                 >
                     <ChevronRight size={20} />
-                    <ChevronRight size={20} className="-ml-3" />
                 </button>
             </div>
         </div>
