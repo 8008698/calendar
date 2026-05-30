@@ -58,12 +58,16 @@ const CalendarHeader: React.FC<CalendarHeaderProps> = ({
             <div className="flex items-center gap-2">
                 <button
                     onClick={onMenuClick}
+                    aria-label="Open menu"
+                    title="Open menu"
                     className="p-2.5 rounded-lg bg-white/90 dark:bg-gray-700 text-blue-600 dark:text-gray-300 hover:text-blue-700 dark:hover:text-blue-400 transition-colors duration-200"
                 >
                     <Menu size={18} />
                 </button>
                 <button
                     onClick={onThemeToggle}
+                    aria-label={theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme'}
+                    title={theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme'}
                     className="p-2.5 rounded-lg bg-white/90 dark:bg-gray-700 text-blue-600 dark:text-gray-300 hover:text-blue-700 dark:hover:text-blue-400 transition-colors duration-200"
                 >
                     {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
