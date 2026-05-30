@@ -417,7 +417,7 @@ function getEventsForDate(date, bsInfo, lunarInfo) {
 
 // Main Calculation Function
 function calculate(date, lat, lon, tz) {
-    var cacheKey = "panchanga_" + date.getTime();
+    var cacheKey = "panchanga_" + date.getTime() + "_" + lat + "_" + lon + "_" + tz;
     if (calculationCache[cacheKey]) return calculationCache[cacheKey];
     var jd = toJulianDay(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
     var ahar = jd - KaliEpoch + 0.25 + (((lon || 85.3240) / 15 - (tz || 5.75)) / 24);
@@ -571,7 +571,7 @@ function generateDebugInfo(date, lat, lon, tz) {
     lat = lat || 27.7172;
     lon = lon || 85.3240;
     tz = tz || 5.75;
-    var cacheKey = "debug_" + date.getTime();
+    var cacheKey = "debug_" + date.getTime() + "_" + lat + "_" + lon + "_" + tz;
     if (calculationCache[cacheKey]) return calculationCache[cacheKey];
     var bsInfoData = toBikramSambat(date, lon, tz);
 
