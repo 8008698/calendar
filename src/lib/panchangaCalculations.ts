@@ -1,7 +1,6 @@
 import { EventsData } from '../data/eventsData';
 import { getSunriseSunset, toDevanagari } from './bikramCalculations';
 import { toBikramSambat } from './dateConversions';
-import { Bsdata } from '../data/monthData';
 
 const YugaRotation = { 'star': 1582237828, 'sun': 4320000, 'moon': 57753336, 'Candrocca': 488203 };
 const YugaCivilDays = 1577917828;
@@ -99,7 +98,7 @@ function calculateAdhikaMasa(ahar: number): string {
     const lunarMonthEnd = findNewMoon(lunarMonthStart + 29.530588853);
     const sunLongStart = trueLongitudeSun(lunarMonthStart);
     const sunLongEnd = trueLongitudeSun(lunarMonthEnd);
-    let startSign = Math.floor(sunLongStart / 30);
+    const startSign = Math.floor(sunLongStart / 30);
     let endSign = Math.floor(sunLongEnd / 30);
 
     if (endSign < startSign) endSign += 12;
