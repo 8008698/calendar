@@ -261,8 +261,6 @@ export function getEventsForDate(date: Date, bsYear: number, bsMonthIndex: numbe
 }
 
 export function calculate(date: Date, lat?: number, lon?: number, tz?: number) {
-    const cacheKey = "panchanga_" + date.getTime();
-
     const jd = toJulianDay(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
     const ahar = jd - KaliEpoch + 0.25 + (((lon || 85.3240) / 15 - (tz || 5.75)) / 24);
     const sunLong = trueLongitudeSun(ahar);
