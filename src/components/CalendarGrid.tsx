@@ -89,12 +89,12 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({
                         {date.getDate()}
                     </span>
                     {isPurnima && (
-                        <svg className="absolute top-2 left-2 w-5 h-5" viewBox="0 0 24 24" fill="none">
+                        <svg className="absolute top-1 left-1 sm:top-2 sm:left-2 w-3 h-3 sm:w-4 sm:h-4" viewBox="0 0 24 24" fill="none">
                             <circle cx="12" cy="12" r="10" className="fill-yellow-400 dark:fill-yellow-300 stroke-yellow-600 dark:stroke-yellow-500" strokeWidth="1" />
                         </svg>
                     )}
                     {isAmavasya && (
-                        <svg className="absolute top-2 left-2 w-5 h-5" viewBox="0 0 24 24" fill="none">
+                        <svg className="absolute top-1 left-1 sm:top-2 sm:left-2 w-3 h-3 sm:w-4 sm:h-4" viewBox="0 0 24 24" fill="none">
                             <circle cx="12" cy="12" r="10" className="fill-gray-800 dark:fill-gray-600 stroke-gray-900 dark:stroke-gray-500" strokeWidth="1" />
                         </svg>
                     )}
@@ -168,12 +168,12 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({
                         {toDevanagari(bsDate.day)}
                     </span>
                     {isPurnima && (
-                        <svg className="absolute top-2 left-2 w-5 h-5" viewBox="0 0 24 24" fill="none">
+                        <svg className="absolute top-1 left-1 sm:top-2 sm:left-2 w-3 h-3 sm:w-4 sm:h-4" viewBox="0 0 24 24" fill="none">
                             <circle cx="12" cy="12" r="10" className="fill-yellow-400 dark:fill-yellow-300 stroke-yellow-600 dark:stroke-yellow-500" strokeWidth="1" />
                         </svg>
                     )}
                     {isAmavasya && (
-                        <svg className="absolute top-2 left-2 w-5 h-5" viewBox="0 0 24 24" fill="none">
+                        <svg className="absolute top-1 left-1 sm:top-2 sm:left-2 w-3 h-3 sm:w-4 sm:h-4" viewBox="0 0 24 24" fill="none">
                             <circle cx="12" cy="12" r="10" className="fill-gray-800 dark:fill-gray-600 stroke-gray-900 dark:stroke-gray-500" strokeWidth="1" />
                         </svg>
                     )}
