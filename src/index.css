@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .calendar-day {
-  @apply relative bg-white dark:bg-gray-800 border-b border-r border-gray-200 dark:border-gray-700 p-1 sm:p-2 cursor-pointer transition-colors duration-200 hover:bg-gray-50 dark:hover:bg-gray-700 flex flex-col aspect-square overflow-hidden;
+  @apply relative bg-white dark:bg-gray-800 border-b border-r border-gray-300 dark:border-gray-600 p-1 sm:p-2 pb-5 sm:pb-5 cursor-pointer transition-colors duration-200 hover:bg-gray-50 dark:hover:bg-gray-700 flex flex-col aspect-square overflow-hidden;
 }
 
 .calendar-day.today {
@@ -11,10 +11,18 @@
 }
 
 .calendar-day.saturday {
-  @apply bg-red-50/20 dark:bg-red-900/10;
+  @apply bg-red-100 dark:bg-red-900/30;
 }
 
 .calendar-day.saturday .main-number {
+  @apply text-red-500 dark:text-red-400;
+}
+
+.calendar-day.saturday .sub-number {
+  @apply text-red-500 dark:text-red-400;
+}
+
+.calendar-day.saturday .tithi-display {
   @apply text-red-500 dark:text-red-400;
 }
 
@@ -23,15 +31,15 @@
 }
 
 .main-number {
-  @apply text-lg sm:text-xl font-medium text-gray-800 dark:text-gray-100 text-center mb-auto;
+  @apply text-2xl sm:text-3xl font-bold text-gray-800 dark:text-gray-100 text-center mb-auto;
 }
 
 .sub-number {
-  @apply absolute top-0.5 right-0.5 sm:top-1 sm:right-1 text-[10px] sm:text-xs text-gray-400 dark:text-gray-300 font-medium;
+  @apply absolute top-0.5 right-0.5 sm:top-1 sm:right-1 text-xs sm:text-sm text-gray-400 dark:text-gray-300 font-medium;
 }
 
 .tithi-display {
-  @apply text-[9px] sm:text-[10px] text-blue-600 dark:text-gray-200 mt-auto text-left font-medium leading-tight truncate;
+  @apply text-[9px] sm:text-[10px] text-blue-600 dark:text-gray-200 absolute bottom-1 left-1 font-medium leading-tight truncate;
 }
 
 .tithi-display.special {
