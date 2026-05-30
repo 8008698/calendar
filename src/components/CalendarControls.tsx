@@ -48,6 +48,8 @@ const CalendarControls: React.FC<CalendarControlsProps> = ({
             <div className="flex items-center gap-2 sm:gap-3">
                 <button
                     onClick={onPrevYear}
+                    aria-label="Previous year"
+                    title="Previous year"
                     className="p-2 rounded-lg bg-blue-500 dark:bg-gray-700 shadow-sm hover:shadow-md transition-all duration-200 text-white dark:text-gray-300 hover:bg-blue-600 dark:hover:text-blue-400"
                 >
                     <ChevronLeft size={16} />
@@ -55,6 +57,8 @@ const CalendarControls: React.FC<CalendarControlsProps> = ({
                 </button>
                 <button
                     onClick={onPrevMonth}
+                    aria-label="Previous month"
+                    title="Previous month"
                     className="p-2 rounded-lg bg-blue-500 dark:bg-gray-700 shadow-sm hover:shadow-md transition-all duration-200 text-white dark:text-gray-300 hover:bg-blue-600 dark:hover:text-blue-400"
                 >
                     <ChevronLeft size={16} />
@@ -89,12 +93,16 @@ const CalendarControls: React.FC<CalendarControlsProps> = ({
             <div className="flex items-center gap-2 sm:gap-3">
                 <button
                     onClick={onNextMonth}
+                    aria-label="Next month"
+                    title="Next month"
                     className="p-2 rounded-lg bg-blue-500 dark:bg-gray-700 shadow-sm hover:shadow-md transition-all duration-200 text-white dark:text-gray-300 hover:bg-blue-600 dark:hover:text-blue-400"
                 >
                     <ChevronRight size={16} />
                 </button>
                 <button
                     onClick={onNextYear}
+                    aria-label="Next year"
+                    title="Next year"
                     className="p-2 rounded-lg bg-blue-500 dark:bg-gray-700 shadow-sm hover:shadow-md transition-all duration-200 text-white dark:text-gray-300 hover:bg-blue-600 dark:hover:text-blue-400"
                 >
                     <ChevronRight size={16} />

@@ -1,5 +1,5 @@
 import { Bsdata } from '../data/monthData';
-import { solarMonths, toDevanagari } from './bikramCalculations';
+import { solarMonths } from './bikramCalculations';
 
 export interface BikramDate {
     year: number;
