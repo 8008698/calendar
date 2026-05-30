@@ -1,3 +1,3 @@
-## 2026-05-30 - [Calendar UI Polish]
-**Learning:** Strong borders and saturated background colors create visual noise. A premium UI uses subtle, low-contrast borders (e.g. `border-gray-200`), modern neutral backgrounds (`bg-gray-50`), transparent inputs/selects, and robust `aria-label` attributes on purely icon-based controls.
-**Action:** Replaced hard `gap-1` and `bg-blue-600` in Calendar components with border grids, neutral backgrounds, minimal hover states, and clear typography while maintaining accessibility via proper ARIA roles/labels.
+## 2026-05-30 - Responsive Mobile Grid Spacing
+**Learning:** Using `aspect-square` on calendar grid elements causes cramped and squished text on narrow mobile viewports, making the calendar unusable or aesthetically displeasing.
+**Action:** Replaced `aspect-square` with `min-h-[4.5rem]` in CSS to allow cells to flex correctly and provide adequate space for internal content like Tithi texts and events on mobile.

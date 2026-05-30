@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .calendar-day {
-  @apply relative bg-white dark:bg-gray-800 border-b border-r border-gray-300 dark:border-gray-600 p-1 sm:p-2 pb-5 sm:pb-5 cursor-pointer transition-colors duration-200 hover:bg-gray-50 dark:hover:bg-gray-700 flex flex-col aspect-square overflow-hidden;
+  @apply relative bg-white dark:bg-gray-800 border-b border-r border-gray-200 dark:border-gray-700 p-1 sm:p-2 pb-5 sm:pb-5 cursor-pointer transition-colors duration-200 hover:bg-gray-50 dark:hover:bg-gray-700 flex flex-col min-h-[4.5rem] overflow-hidden;
 }
 
 .calendar-day.today {
@@ -11,7 +11,7 @@
 }
 
 .calendar-day.saturday {
-  @apply bg-red-100 dark:bg-red-900/30;
+  @apply bg-red-50/50 dark:bg-red-900/20;
 }
 
 .calendar-day.saturday .main-number {
