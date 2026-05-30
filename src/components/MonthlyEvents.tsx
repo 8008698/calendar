@@ -1,6 +1,6 @@
 import React from 'react';
 import { toBikramSambat, fromBikramSambat, getBikramMonthInfo } from '../lib/dateConversions';
-import { getEventsForDate } from '../lib/panchangaCalculations';
+import { getEventsForMonthBatched } from '../lib/panchangaCalculations';
 import { toDevanagari } from '../lib/bikramCalculations';
 
 interface MonthlyEventsProps {
@@ -21,9 +21,17 @@ const MonthlyEvents: React.FC<MonthlyEventsProps> = ({
             const monthInfo = getBikramMonthInfo(currentYear, currentMonth);
             if (!monthInfo) return eventsMap;
 
+            const days = [];
             for (let day = 1; day <= monthInfo.totalDays; day++) {
                 const date = fromBikramSambat(currentYear, currentMonth, day);
-                const dayEvents = getEventsForDate(date, currentYear, currentMonth, day);
+                days.push({ date, bsYear: currentYear, bsMonthIndex: currentMonth, bsDay: day });
+            }
+
+            const batchedEvents = getEventsForMonthBatched(days);
+
+            for (let day = 1; day <= monthInfo.totalDays; day++) {
+                // days array is 0-indexed, so day 1 is at index 0
+                const dayEvents = batchedEvents.get(day - 1) || [];
                 if (dayEvents.length > 0) {
                     eventsMap.set(day, dayEvents.map(e => ({ name: e.name, holiday: e.holiday || false })));
                 }
@@ -31,10 +39,18 @@ const MonthlyEvents: React.FC<MonthlyEventsProps> = ({
         } else {
             const lastDay = new Date(currentYear, currentMonth + 1, 0);
 
+            const days = [];
+
             for (let day = 1; day <= lastDay.getDate(); day++) {
                 const date = new Date(currentYear, currentMonth, day);
                 const bsDate = toBikramSambat(date);
-                const dayEvents = getEventsForDate(date, bsDate.year, bsDate.monthIndex, bsDate.day);
+                days.push({ date, bsYear: bsDate.year, bsMonthIndex: bsDate.monthIndex, bsDay: bsDate.day });
+            }
+
+            const batchedEvents = getEventsForMonthBatched(days);
+
+            for (let day = 1; day <= lastDay.getDate(); day++) {
+                const dayEvents = batchedEvents.get(day - 1) || [];
                 if (dayEvents.length > 0) {
                     eventsMap.set(day, dayEvents.map(e => ({ name: e.name, holiday: e.holiday || false })));
                 }

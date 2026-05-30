@@ -1,6 +1,6 @@
 import React from 'react';
 import { toBikramSambat, fromBikramSambat, getBikramMonthInfo } from '../lib/dateConversions';
-import { _getPanchangaBasics, getEventsForDate } from '../lib/panchangaCalculations';
+import { _getPanchangaBasics, getEventsForMonthBatched } from '../lib/panchangaCalculations';
 import { toDevanagari } from '../lib/bikramCalculations';
 
 interface CalendarGridProps {
@@ -43,12 +43,20 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({
             );
         }
 
-        // Days of the month
+        const daysToBatch = [];
         for (let day = 1; day <= monthInfo.totalDays; day++) {
             const date = fromBikramSambat(currentYear, currentMonth, day);
-            const panchanga = _getPanchangaBasics(date);
             const bsFullDate = toBikramSambat(date);
-            const events = getEventsForDate(date, bsFullDate.year, bsFullDate.monthIndex, bsFullDate.day);
+            daysToBatch.push({ date, bsYear: bsFullDate.year, bsMonthIndex: bsFullDate.monthIndex, bsDay: bsFullDate.day });
+        }
+
+        const batchedEvents = getEventsForMonthBatched(daysToBatch);
+
+        // Days of the month
+        for (let day = 1; day <= monthInfo.totalDays; day++) {
+            const date = daysToBatch[day - 1].date;
+            const panchanga = _getPanchangaBasics(date);
+            const events = batchedEvents.get(day - 1) || [];
 
             let classes = 'calendar-day';
             if (date.getDay() === 6) classes += ' saturday';
@@ -113,12 +121,21 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({
             );
         }
 
-        // Days of the month
+        const daysToBatch = [];
         for (let day = 1; day <= lastDay.getUTCDate(); day++) {
             const date = new Date(Date.UTC(currentYear, currentMonth, day));
             const bsDate = toBikramSambat(date);
+            daysToBatch.push({ date, bsYear: bsDate.year, bsMonthIndex: bsDate.monthIndex, bsDay: bsDate.day, bsDateObj: bsDate });
+        }
+
+        const batchedEvents = getEventsForMonthBatched(daysToBatch);
+
+        // Days of the month
+        for (let day = 1; day <= lastDay.getUTCDate(); day++) {
+            const date = daysToBatch[day - 1].date;
+            const bsDate = daysToBatch[day - 1].bsDateObj;
             const panchanga = _getPanchangaBasics(date);
-            const events = getEventsForDate(date, bsDate.year, bsDate.monthIndex, bsDate.day);
+            const events = batchedEvents.get(day - 1) || [];
 
             let classes = 'calendar-day';
             if (date.getUTCDay() === 6) classes += ' saturday';

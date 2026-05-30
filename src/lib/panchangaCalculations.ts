@@ -259,6 +259,129 @@ export function getEventsForDate(date: Date, bsYear: number, bsMonthIndex: numbe
     return events;
 }
 
+export function getEventsForMonthBatched(
+    days: { date: Date, bsYear: number, bsMonthIndex: number, bsDay: number }[]
+) {
+    const results = new Map<number, any[]>();
+
+    // Process days sequentially to avoid calling _getPanchangaBasics for yesterday if we already did it
+    let yesterdayInfo: any = null;
+
+    for (let index = 0; index < days.length; index++) {
+        const { date, bsYear, bsMonthIndex, bsDay } = days[index];
+        const events: any[] = [];
+
+        const gregorianYear = date.getUTCFullYear();
+        const gregorianMonth = date.getUTCMonth() + 1;
+        const gregorianDay = date.getUTCDate();
+
+        const formatMonthDay = (month: number, day: number) => {
+            return (month < 10 ? '0' : '') + month + '/' + (day < 10 ? '0' : '') + day;
+        };
+
+        const formattedGregorianDate = formatMonthDay(gregorianMonth, gregorianDay);
+        const formattedBikramRecurringDate = formatMonthDay(bsMonthIndex + 1, bsDay);
+
+        // Handle Gregorian events
+        if (EventsData.gregorianEvents) {
+            for (let i = 0; i < EventsData.gregorianEvents.length; i++) {
+                const event = EventsData.gregorianEvents[i];
+                if (event.date === formattedGregorianDate) {
+                    events.push({
+                        name: event.event,
+                        detail: event.detail,
+                        category: event.category,
+                        holiday: event.holiday || false
+                    });
+                }
+            }
+        }
+
+        // Handle Bikram recurring events
+        if (EventsData.bikramRecurringEvents) {
+            for (let j = 0; j < EventsData.bikramRecurringEvents.length; j++) {
+                const event = EventsData.bikramRecurringEvents[j];
+                if (event.date === formattedBikramRecurringDate) {
+                    events.push({
+                        name: event.event,
+                        detail: event.detail,
+                        category: event.category,
+                        holiday: event.holiday || false
+                    });
+                }
+            }
+        }
+
+        // Handle Bikram fixed events
+        if (EventsData.bikramFixedEvents) {
+            const formattedFixedDate = bsYear + "/" + formatMonthDay(bsMonthIndex + 1, bsDay);
+            for (let i = 0; i < EventsData.bikramFixedEvents.length; i++) {
+                const event = EventsData.bikramFixedEvents[i];
+                if (event.date === formattedFixedDate) {
+                    events.push({
+                        name: event.event,
+                        detail: event.detail,
+                        category: event.category,
+                        holiday: event.holiday || false
+                    });
+                }
+            }
+        }
+
+        // Handle Lunar events
+        if (EventsData.lunarEvents) {
+            const todayInfo = _getPanchangaBasics(date);
+
+            if (!todayInfo.isAdhika) {
+                if (!yesterdayInfo) {
+                    const yesterday = new Date(date.getTime() - 86400000);
+                    yesterdayInfo = _getPanchangaBasics(yesterday);
+                }
+
+                const prevLunarMonthAhar = todayInfo.ahar - 29.53;
+                const prevMonthStatus = calculateAdhikaMasa(prevLunarMonthAhar);
+                let kshayaMonthName: string | null = null;
+                if (prevMonthStatus.startsWith("क्षय")) {
+                    kshayaMonthName = prevMonthStatus.split(" ")[1];
+                }
+
+                for (let k = 0; k < EventsData.lunarEvents.length; k++) {
+                    const lunarEvent = EventsData.lunarEvents[k];
+
+                    const isEventForToday = (lunarEvent.lunarMonth === todayInfo.lunarMonthName &&
+                                           lunarEvent.paksha === todayInfo.paksha &&
+                                           lunarEvent.tithi === todayInfo.tithiName);
+
+                    const isEventFromKshayaMonth = (kshayaMonthName !== null &&
+                                                  lunarEvent.lunarMonth === kshayaMonthName &&
+                                                  lunarEvent.paksha === todayInfo.paksha &&
+                                                  lunarEvent.tithi === todayInfo.tithiName);
+
+                    if (isEventForToday || isEventFromKshayaMonth) {
+                        const isFirstDayOfTithi = !(yesterdayInfo.lunarMonthName === todayInfo.lunarMonthName &&
+                                                  yesterdayInfo.paksha === todayInfo.paksha &&
+                                                  yesterdayInfo.tithiName === todayInfo.tithiName);
+
+                        if (isFirstDayOfTithi) {
+                            events.push({
+                                name: lunarEvent.event,
+                                detail: lunarEvent.detail,
+                                category: lunarEvent.category,
+                                holiday: lunarEvent.holiday || false
+                            });
+                        }
+                    }
+                }
+            }
+            yesterdayInfo = todayInfo;
+        }
+
+        results.set(index, events);
+    }
+
+    return results;
+}
+
 export function calculate(date: Date, lat?: number, lon?: number, tz?: number) {
 
     const jd = toJulianDay(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
