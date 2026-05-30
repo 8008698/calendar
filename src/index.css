@@ -3,27 +3,27 @@
 @tailwind utilities;
 
 .calendar-day {
-  @apply relative bg-white dark:bg-gray-700 border border-blue-200 dark:border-gray-600 rounded-lg p-1 sm:p-2 cursor-pointer transition-all duration-200 hover:shadow-md hover:border-blue-400 dark:hover:border-blue-500 flex flex-col aspect-square overflow-hidden;
+  @apply relative bg-white dark:bg-gray-800 border-b border-r border-gray-200 dark:border-gray-700 p-1 sm:p-2 cursor-pointer transition-colors duration-200 hover:bg-gray-50 dark:hover:bg-gray-700 flex flex-col aspect-square overflow-hidden;
 }
 
 .calendar-day.today {
-  @apply ring-2 ring-blue-500 dark:ring-blue-400 bg-yellow-50/50 dark:bg-blue-900/20;
+  @apply ring-inset ring-2 ring-blue-500 dark:ring-blue-400 bg-blue-50/30 dark:bg-blue-900/10;
 }
 
 .calendar-day.saturday {
-  @apply bg-red-50/30 dark:bg-red-900/10 border-red-200 dark:border-red-800;
+  @apply bg-red-50/20 dark:bg-red-900/10;
 }
 
 .calendar-day.saturday .main-number {
-  @apply text-red-600 dark:text-red-400;
+  @apply text-red-500 dark:text-red-400;
 }
 
 .calendar-day.holiday {
-  @apply border-orange-400 dark:border-orange-500;
+  @apply bg-orange-50/20 dark:bg-orange-900/10;
 }
 
 .main-number {
-  @apply text-lg sm:text-xl font-bold text-blue-900 dark:text-white text-center mb-auto;
+  @apply text-lg sm:text-xl font-medium text-gray-800 dark:text-gray-100 text-center mb-auto;
 }
 
 .sub-number {
@@ -51,5 +51,5 @@
 }
 
 .weekday {
-  @apply text-center font-semibold text-sm uppercase py-2 text-white dark:text-gray-300 rounded-sm;
+  @apply text-center font-medium text-sm py-2 text-gray-500 dark:text-gray-400;
 }

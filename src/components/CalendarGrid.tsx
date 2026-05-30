@@ -189,14 +189,14 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({
     };
 
     return (
-        <div className="h-full flex flex-col">
+        <div className="h-full flex flex-col p-4">
             {/* Weekdays Header */}
-            <div className="grid grid-cols-7 gap-1 mb-1 flex-shrink-0">
+            <div className="grid grid-cols-7 gap-0 mb-2 flex-shrink-0">
                 {weekdays.map((day, index) => (
                     <div
                         key={day}
                         className={`weekday ${
-                            index === 6 ? 'bg-red-600 dark:bg-red-800' : 'bg-blue-600 dark:bg-gray-700'
+                            index === 6 ? 'text-red-500' : ''
                         }`}
                         style={activeSystem === 'bs' ? { fontFamily: "'Noto Sans Devanagari', sans-serif" } : {}}
                     >
@@ -206,7 +206,7 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({
             </div>
 
             {/* Calendar Grid */}
-            <div className="grid grid-cols-7 gap-1 flex-1" style={{ gridAutoRows: '1fr' }}>
+            <div className="grid grid-cols-7 gap-0 flex-1 border-t border-l border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-sm" style={{ gridAutoRows: '1fr' }}>
                 {activeSystem === 'bs' ? renderBikramSambatCalendar() : renderGregorianCalendar()}
             </div>
         </div>
