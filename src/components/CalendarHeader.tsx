@@ -19,26 +19,26 @@ const CalendarHeader: React.FC<CalendarHeaderProps> = ({
     onMenuClick
 }) => {
     return (
-        <header className="flex items-center justify-between p-3 bg-blue-600 dark:bg-gray-800 backdrop-blur-sm border-b border-blue-700 dark:border-gray-700 flex-shrink-0">
+        <header className="flex items-center justify-between py-3 px-1 sm:px-2 flex-shrink-0">
             <div className="flex items-center gap-3">
-                <div className="flex bg-white/90 dark:bg-gray-700 rounded-lg p-1">
+                <div className="flex bg-white dark:bg-gray-800 rounded-lg p-1 shadow-sm border border-gray-200 dark:border-gray-700">
                     <button
-                        className={`px-4 py-2 rounded-md transition-all duration-200 ${
+                        className={`px-4 py-2 rounded-md transition-colors duration-200 ${
                             activeSystem === 'bs'
-                                ? 'bg-blue-600 text-white shadow-sm'
-                                : 'text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400'
-                        } text-sm sm:text-base font-medium`}
+                                ? 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white font-semibold'
+                                : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'
+                        } text-sm sm:text-base`}
                         onClick={() => onSystemChange('bs')}
                     >
                         <span className="hidden md:inline">Bikram Sambat</span>
                         <span className="md:hidden">BS</span>
                     </button>
                     <button
-                        className={`px-4 py-2 rounded-md transition-all duration-200 ${
+                        className={`px-4 py-2 rounded-md transition-colors duration-200 ${
                             activeSystem === 'ad'
-                                ? 'bg-orange-500 text-white shadow-sm'
-                                : 'text-gray-600 dark:text-gray-400 hover:text-orange-500'
-                        } text-sm sm:text-base font-medium`}
+                                ? 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white font-semibold'
+                                : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'
+                        } text-sm sm:text-base`}
                         onClick={() => onSystemChange('ad')}
                     >
                         <span className="hidden md:inline">Gregorian</span>
@@ -48,7 +48,8 @@ const CalendarHeader: React.FC<CalendarHeaderProps> = ({
                 
                 <button
                     onClick={onTodayClick}
-                    className="px-4 sm:px-5 py-2 bg-white text-blue-600 rounded-lg hover:bg-blue-50 transition-colors duration-200 font-medium text-sm sm:text-base"
+                    aria-label="Go to today"
+                    className="px-4 py-2 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200 font-medium text-sm sm:text-base"
                     style={{ fontFamily: "'Noto Sans Devanagari', sans-serif" }}
                 >
                     आज
@@ -60,7 +61,7 @@ const CalendarHeader: React.FC<CalendarHeaderProps> = ({
                     onClick={onMenuClick}
                     aria-label="Open menu"
                     title="Open menu"
-                    className="p-2.5 rounded-lg bg-white/90 dark:bg-gray-700 text-blue-600 dark:text-gray-300 hover:text-blue-700 dark:hover:text-blue-400 transition-colors duration-200"
+                    className="p-2.5 rounded-lg bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 shadow-sm border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
                 >
                     <Menu size={18} />
                 </button>
@@ -68,7 +69,7 @@ const CalendarHeader: React.FC<CalendarHeaderProps> = ({
                     onClick={onThemeToggle}
                     aria-label={theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme'}
                     title={theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme'}
-                    className="p-2.5 rounded-lg bg-white/90 dark:bg-gray-700 text-blue-600 dark:text-gray-300 hover:text-blue-700 dark:hover:text-blue-400 transition-colors duration-200"
+                    className="p-2.5 rounded-lg bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 shadow-sm border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
                 >
                     {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
                 </button>

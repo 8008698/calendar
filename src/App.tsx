@@ -119,7 +119,7 @@ function App() {
     const currentMonth = activeSystem === 'bs' ? currentBsMonth : currentAdMonth;
 
     return (
-        <div className="h-screen bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-colors duration-300 flex flex-col overflow-hidden">
+        <div className="h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300 flex flex-col overflow-hidden">
             <div className="w-full max-w-7xl mx-auto flex-1 flex flex-col min-h-0 px-2 sm:px-4 lg:px-8 xl:px-16 overflow-hidden">
                 <CalendarHeader
                     activeSystem={activeSystem}
@@ -131,7 +131,7 @@ function App() {
                 />
 
                 <div className="py-1 sm:py-2 space-y-1 sm:space-y-2 flex-1 flex flex-col min-h-0 overflow-hidden">
-                    <div className="bg-white dark:bg-gray-800 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 flex-1 flex flex-col min-h-0 overflow-hidden">
+                    <div className="bg-white dark:bg-gray-800 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 flex-1 flex flex-col min-h-0 overflow-hidden">
                         <CalendarControls
                             activeSystem={activeSystem}
                             currentYear={currentYear}
@@ -156,7 +156,7 @@ function App() {
                             onNextYear={handleNextYear}
                         />
 
-                        <div className="p-2 sm:p-3 flex-1 min-h-0 overflow-auto">
+                        <div className="flex-1 min-h-0 overflow-auto bg-gray-50 dark:bg-gray-800/50">
                             <CalendarGrid
                                 activeSystem={activeSystem}
                                 currentYear={currentYear}

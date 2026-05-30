@@ -44,32 +44,33 @@ const CalendarControls: React.FC<CalendarControlsProps> = ({
     };
 
     return (
-        <div className="flex items-center justify-between p-1.5 sm:p-2 bg-white dark:bg-gray-700/50 flex-shrink-0">
-            <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex items-center justify-between p-3 sm:p-4 bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700 flex-shrink-0">
+            <div className="flex items-center gap-1 sm:gap-2">
                 <button
                     onClick={onPrevYear}
                     aria-label="Previous year"
                     title="Previous year"
-                    className="p-2 rounded-lg bg-blue-500 dark:bg-gray-700 shadow-sm hover:shadow-md transition-all duration-200 text-white dark:text-gray-300 hover:bg-blue-600 dark:hover:text-blue-400"
+                    className="p-2 rounded-lg transition-colors duration-200 text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
                 >
-                    <ChevronLeft size={16} />
-                    <ChevronLeft size={16} className="-ml-2" />
+                    <ChevronLeft size={20} />
+                    <ChevronLeft size={20} className="-ml-3" />
                 </button>
                 <button
                     onClick={onPrevMonth}
                     aria-label="Previous month"
                     title="Previous month"
-                    className="p-2 rounded-lg bg-blue-500 dark:bg-gray-700 shadow-sm hover:shadow-md transition-all duration-200 text-white dark:text-gray-300 hover:bg-blue-600 dark:hover:text-blue-400"
+                    className="p-2 rounded-lg transition-colors duration-200 text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
                 >
-                    <ChevronLeft size={16} />
+                    <ChevronLeft size={20} />
                 </button>
             </div>
 
-            <div className="flex items-center gap-3 sm:gap-4">
+            <div className="flex items-center gap-2 sm:gap-3">
                 <select
                     value={currentMonth}
                     onChange={(e) => onMonthChange(parseInt(e.target.value))}
-                    className="px-3 py-2 bg-white dark:bg-gray-700 border border-blue-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm text-blue-900 dark:text-gray-100"
+                    aria-label="Select month"
+                    className="px-2 py-1 bg-transparent border-none focus:ring-0 text-lg sm:text-xl font-semibold text-gray-900 dark:text-white cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-colors"
                     style={activeSystem === 'bs' ? { fontFamily: "'Noto Sans Devanagari', sans-serif" } : {}}
                 >
                     {months.map((month, index) => (
@@ -83,30 +84,31 @@ const CalendarControls: React.FC<CalendarControlsProps> = ({
                     type={activeSystem === 'bs' ? 'text' : 'number'}
                     value={activeSystem === 'bs' ? toDevanagari(currentYear) : currentYear}
                     onChange={handleYearInputChange}
-                    className="w-20 px-3 py-2 text-center bg-white dark:bg-gray-700 border border-blue-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm text-blue-900 dark:text-gray-100"
+                    aria-label="Enter year"
+                    className="w-20 px-2 py-1 text-center bg-transparent border-none focus:ring-0 text-lg sm:text-xl font-semibold text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-colors"
                     style={activeSystem === 'bs' ? { fontFamily: "'Noto Sans Devanagari', sans-serif" } : {}}
                     min={activeSystem === 'bs' ? 2000 : 1944}
                     max={activeSystem === 'bs' ? 2089 : 2043}
                 />
             </div>
 
-            <div className="flex items-center gap-2 sm:gap-3">
+            <div className="flex items-center gap-1 sm:gap-2">
                 <button
                     onClick={onNextMonth}
                     aria-label="Next month"
                     title="Next month"
-                    className="p-2 rounded-lg bg-blue-500 dark:bg-gray-700 shadow-sm hover:shadow-md transition-all duration-200 text-white dark:text-gray-300 hover:bg-blue-600 dark:hover:text-blue-400"
+                    className="p-2 rounded-lg transition-colors duration-200 text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
                 >
-                    <ChevronRight size={16} />
+                    <ChevronRight size={20} />
                 </button>
                 <button
                     onClick={onNextYear}
                     aria-label="Next year"
                     title="Next year"
-                    className="p-2 rounded-lg bg-blue-500 dark:bg-gray-700 shadow-sm hover:shadow-md transition-all duration-200 text-white dark:text-gray-300 hover:bg-blue-600 dark:hover:text-blue-400"
+                    className="p-2 rounded-lg transition-colors duration-200 text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
                 >
-                    <ChevronRight size={16} />
-                    <ChevronRight size={16} className="-ml-2" />
+                    <ChevronRight size={20} />
+                    <ChevronRight size={20} className="-ml-3" />
                 </button>
             </div>
         </div>
