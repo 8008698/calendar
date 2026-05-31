@@ -1,3 +1,3 @@
-## 2026-05-30 - Responsive Mobile Grid Spacing
-**Learning:** Using `aspect-square` on calendar grid elements causes cramped and squished text on narrow mobile viewports, making the calendar unusable or aesthetically displeasing.
-**Action:** Replaced `aspect-square` with `min-h-[4.5rem]` in CSS to allow cells to flex correctly and provide adequate space for internal content like Tithi texts and events on mobile.
+## 2024-03-20 - Modal Accessibility Pattern
+**Learning:** Found a recurring pattern of missing accessibility features in custom modal dialogs (specifically `DayDetailsModal` and `MobileMenu`). Missing features include: lack of `aria-label` for icon-only close buttons, screen readers parsing the icon itself (missing `aria-hidden="true"`), absent visible focus rings for keyboard navigation, and missing Escape key event listeners for keyboard dismissal.
+**Action:** When working on or creating custom modals/dialogs, always ensure close buttons have accessible names, icons are hidden from screen readers, visible focus styles (`focus-visible:ring-2`, etc.) are applied, and an `Escape` keydown event listener is attached (and properly cleaned up) to dismiss the dialog.

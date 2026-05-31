@@ -10,15 +10,24 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
     const [activeTab, setActiveTab] = useState<'about' | 'source'>('about');
 
     useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') {
+                onClose();
+            }
+        };
+
         if (isOpen) {
             document.body.style.overflow = 'hidden';
+            document.addEventListener('keydown', handleKeyDown);
         } else {
             document.body.style.overflow = 'unset';
         }
+
         return () => {
             document.body.style.overflow = 'unset';
+            document.removeEventListener('keydown', handleKeyDown);
         };
-    }, [isOpen]);
+    }, [isOpen, onClose]);
 
     if (!isOpen) return null;
 
@@ -34,9 +43,10 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
                     <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Menu</h2>
                     <button
                         onClick={onClose}
-                        className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+                        aria-label="Close menu"
+                        className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-gray-400"
                     >
-                        <X className="w-5 h-5 text-gray-600 dark:text-gray-300" />
+                        <X className="w-5 h-5 text-gray-600 dark:text-gray-300" aria-hidden="true" />
                     </button>
                 </div>
 
