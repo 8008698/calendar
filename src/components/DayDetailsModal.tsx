@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { X } from 'lucide-react';
 import { calculate } from '../lib/panchangaCalculations';
 
@@ -9,6 +9,22 @@ interface DayDetailsModalProps {
 }
 
 const DayDetailsModal: React.FC<DayDetailsModalProps> = ({ date, isOpen, onClose }) => {
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') {
+                onClose();
+            }
+        };
+
+        if (isOpen) {
+            document.addEventListener('keydown', handleKeyDown);
+        }
+
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [isOpen, onClose]);
+
     if (!isOpen || !date) return null;
 
     const data = calculate(date);
@@ -30,9 +46,10 @@ const DayDetailsModal: React.FC<DayDetailsModalProps> = ({ date, isOpen, onClose
                         <h2 className="text-lg font-bold text-red-500">Error</h2>
                         <button
                             onClick={onClose}
-                            className="p-1 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                            aria-label="Close error dialog"
+                            className="p-1 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-gray-400"
                         >
-                            <X size={20} />
+                            <X size={20} aria-hidden="true" />
                         </button>
                     </div>
                     <p className="text-red-500 text-sm">{data.error}</p>
@@ -61,9 +78,10 @@ const DayDetailsModal: React.FC<DayDetailsModalProps> = ({ date, isOpen, onClose
                         </div>
                         <button
                             onClick={onClose}
-                            className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                            aria-label="Close details dialog"
+                            className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-gray-400"
                         >
-                            <X size={20} />
+                            <X size={20} aria-hidden="true" />
                         </button>
                     </div>
                 </div>
