@@ -58,7 +58,7 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({
             const panchanga = _getPanchangaBasics(date);
             const events = batchedEvents.get(day - 1) || [];
 
-            let classes = 'calendar-day';
+            let classes = 'calendar-day focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400';
             if (date.getDay() === 6) classes += ' saturday';
             if (date.toDateString() === today.toDateString()) classes += ' today';
             
@@ -76,11 +76,22 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({
             const isPurnima = panchanga.tithiName === "पूर्णिमा";
             const isAmavasya = panchanga.tithiName === "अमावस्या";
 
+            const ariaLabel = `${date.toDateString()} ${events.length > 0 ? `(${events.length} events)` : ''}`;
+
             cells.push(
                 <div
                     key={day}
                     className={classes}
                     onClick={() => onDayClick(date)}
+                    role="button"
+                    tabIndex={0}
+                    aria-label={ariaLabel}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            onDayClick(date);
+                        }
+                    }}
                 >
                     <span className="main-number" style={{ fontFamily: "'Noto Sans Devanagari', sans-serif" }}>
                         {toDevanagari(day)}
@@ -137,7 +148,7 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({
             const panchanga = _getPanchangaBasics(date);
             const events = batchedEvents.get(day - 1) || [];
 
-            let classes = 'calendar-day';
+            let classes = 'calendar-day focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400';
             if (date.getUTCDay() === 6) classes += ' saturday';
             if (date.toDateString() === today.toDateString()) classes += ' today';
             
@@ -155,11 +166,22 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({
             const isPurnima = panchanga.tithiName === "पूर्णिमा";
             const isAmavasya = panchanga.tithiName === "अमावस्या";
 
+            const ariaLabel = `${date.toDateString()} ${events.length > 0 ? `(${events.length} events)` : ''}`;
+
             cells.push(
                 <div
                     key={day}
                     className={classes}
                     onClick={() => onDayClick(date)}
+                    role="button"
+                    tabIndex={0}
+                    aria-label={ariaLabel}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            onDayClick(date);
+                        }
+                    }}
                 >
                     <span className="main-number">
                         {day}
