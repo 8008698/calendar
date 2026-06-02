@@ -236,7 +236,7 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({
             </div>
 
             {/* Calendar Grid */}
-            <div className="grid grid-cols-7 gap-0.5 sm:gap-1 flex-1 bg-gray-200 dark:bg-gray-700 p-0.5 sm:p-1 rounded-lg overflow-hidden shadow-sm" style={{ gridAutoRows: '1fr' }}>
+            <div className="grid grid-cols-7 gap-px flex-1 bg-gray-200 dark:bg-gray-700 p-0.5 sm:p-1 rounded-lg overflow-hidden shadow-sm" style={{ gridAutoRows: '1fr' }}>
                 {activeSystem === 'bs' ? renderBikramSambatCalendar() : renderGregorianCalendar()}
             </div>
         </div>
