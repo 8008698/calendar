@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from 'lucide-react';
 import { toDevanagari, fromDevanagari } from '../lib/bikramCalculations';
 
 interface CalendarControlsProps {
@@ -50,15 +50,15 @@ const CalendarControls: React.FC<CalendarControlsProps> = ({
                     onClick={onPrevYear}
                     aria-label="Previous year"
                     title="Previous year"
-                    className="p-2 rounded-lg transition-colors duration-200 text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
+                    className="p-2 rounded-lg transition-colors duration-200 text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400"
                 >
-                    <ChevronLeft size={20} />
+                    <ChevronsLeft size={20} />
                 </button>
                 <button
                     onClick={onPrevMonth}
                     aria-label="Previous month"
                     title="Previous month"
-                    className="p-2 rounded-lg transition-colors duration-200 text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
+                    className="p-2 rounded-lg transition-colors duration-200 text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400"
                 >
                     <ChevronLeft size={20} />
                 </button>
@@ -96,7 +96,7 @@ const CalendarControls: React.FC<CalendarControlsProps> = ({
                     onClick={onNextMonth}
                     aria-label="Next month"
                     title="Next month"
-                    className="p-2 rounded-lg transition-colors duration-200 text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
+                    className="p-2 rounded-lg transition-colors duration-200 text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400"
                 >
                     <ChevronRight size={20} />
                 </button>
@@ -104,9 +104,9 @@ const CalendarControls: React.FC<CalendarControlsProps> = ({
                     onClick={onNextYear}
                     aria-label="Next year"
                     title="Next year"
-                    className="p-2 rounded-lg transition-colors duration-200 text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
+                    className="p-2 rounded-lg transition-colors duration-200 text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400"
                 >
-                    <ChevronRight size={20} />
+                    <ChevronsRight size={20} />
                 </button>
             </div>
         </div>
