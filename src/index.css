@@ -70,7 +70,7 @@
   grid-column: 1;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 380px) {
   .tithi-display {
     display: block;
   }
