@@ -3,11 +3,26 @@
 @tailwind utilities;
 
 .calendar-day {
-  @apply relative bg-white dark:bg-gray-800 border-b border-r border-gray-200 dark:border-gray-700 p-1 sm:p-2 pb-5 sm:pb-5 cursor-pointer transition-colors duration-200 hover:bg-gray-50 dark:hover:bg-gray-700 flex flex-col min-h-[4.5rem] overflow-hidden;
+  @apply relative bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded cursor-pointer transition-colors duration-200 hover:bg-gray-50 dark:hover:bg-gray-700 overflow-hidden;
+  aspect-ratio: 1 / 1;
+  display: grid;
+  grid-template-rows: 1fr 2fr 1fr;
+  grid-template-columns: 1fr;
+  padding: 2px;
+}
+
+@media (min-width: 640px) {
+  .calendar-day {
+    padding: 4px;
+  }
+}
+
+.calendar-day.empty-cell {
+  @apply bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 cursor-default hover:bg-gray-50 dark:hover:bg-gray-800/50;
 }
 
 .calendar-day.today {
-  @apply ring-inset ring-2 ring-blue-500 dark:ring-blue-400 bg-blue-50/30 dark:bg-blue-900/10;
+  @apply border-2 border-blue-500 dark:border-blue-400 bg-blue-50 dark:bg-blue-900/20;
 }
 
 .calendar-day.saturday {
@@ -15,47 +30,63 @@
 }
 
 .calendar-day.saturday .main-number {
-  @apply text-red-500 dark:text-red-400;
+  @apply text-red-600 dark:text-red-400;
 }
 
 .calendar-day.saturday .sub-number {
-  @apply text-red-500 dark:text-red-400;
-}
-
-.calendar-day.saturday .tithi-display {
-  @apply text-red-500 dark:text-red-400;
+  @apply text-red-600 dark:text-red-400;
 }
 
 .calendar-day.holiday {
   @apply bg-orange-50/20 dark:bg-orange-900/10;
 }
 
+.calendar-day.amavasya {
+  @apply bg-red-600 border-red-600 dark:bg-red-700 dark:border-red-700 hover:bg-red-700 dark:hover:bg-red-800;
+}
+
+.calendar-day.amavasya .main-number,
+.calendar-day.amavasya .sub-number,
+.calendar-day.amavasya .tithi-display {
+  color: white !important;
+}
+
 .main-number {
-  @apply text-2xl sm:text-3xl font-bold text-gray-800 dark:text-gray-100 text-center mb-auto;
+  @apply text-xl sm:text-2xl font-bold text-gray-800 dark:text-gray-100 flex justify-center items-center;
+  grid-row: 2;
+  grid-column: 1;
 }
 
 .sub-number {
-  @apply absolute top-0.5 right-0.5 sm:top-1 sm:right-1 text-xs sm:text-sm text-gray-400 dark:text-gray-300 font-medium;
+  @apply text-[9px] sm:text-[11px] text-gray-500 dark:text-gray-400 font-normal text-right pr-[2px] pt-[2px] leading-none;
+  grid-row: 1;
+  grid-column: 1;
 }
 
 .tithi-display {
-  @apply text-[9px] sm:text-[10px] text-blue-600 dark:text-gray-200 absolute bottom-1 left-1 font-medium leading-tight truncate;
+  @apply text-[8px] sm:text-[9px] text-blue-600 dark:text-blue-400 font-medium text-left pl-[2px] pb-[2px] leading-none truncate self-end;
+  grid-row: 3;
+  grid-column: 1;
 }
 
 .tithi-display.special {
   @apply font-semibold;
 }
 
-.tithi-display.purnima {
-  @apply text-yellow-700 dark:text-yellow-400;
+.purnima-dot {
+  @apply absolute w-1.5 h-1.5 bg-yellow-400 rounded-full;
+  top: 15%;
+  left: 20%;
 }
 
-.tithi-display.amavasya {
-  @apply text-purple-700 dark:text-purple-400;
+.ekadashi-dot {
+  @apply absolute w-1.5 h-1.5 bg-orange-400 rounded-full;
+  bottom: 25%;
+  right: 15%;
 }
 
 .event-dot {
-  @apply absolute bottom-2 right-2 w-2 h-2 bg-orange-500 dark:bg-blue-400 rounded-full;
+  @apply absolute bottom-1 right-1 w-1.5 h-1.5 bg-blue-500 dark:bg-blue-400 rounded-full;
 }
 
 .weekday {

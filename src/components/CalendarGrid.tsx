@@ -39,7 +39,7 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({
         // Empty cells at the beginning
         for (let i = 0; i < monthInfo.startDayOfWeek; i++) {
             cells.push(
-                <div key={`empty-${i}`} className="h-full bg-transparent" />
+                <div key={`empty-start-${i}`} className="calendar-day empty-cell" />
             );
         }
 
@@ -58,23 +58,23 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({
             const panchanga = _getPanchangaBasics(date);
             const events = batchedEvents.get(day - 1) || [];
 
+            const isPurnima = panchanga.tithiName === "पूर्णिमा";
+            const isAmavasya = panchanga.tithiName === "अमावस्या";
+            const isEkadashi = panchanga.tithiName === "एकादशी";
+
             let classes = 'calendar-day focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400';
             if (date.getDay() === 6) classes += ' saturday';
             if (date.toDateString() === today.toDateString()) classes += ' today';
+            if (isAmavasya) classes += ' amavasya';
             
             const isHoliday = events.some(event => event.holiday);
             if (isHoliday) classes += ' holiday';
 
             let tithiClass = 'tithi-display';
 
-            if (panchanga.tithiName === "पूर्णिमा") {
+            if (isPurnima) {
                 tithiClass += ' special purnima';
-            } else if (panchanga.tithiName === "अमावस्या") {
-                tithiClass += ' special amavasya';
             }
-
-            const isPurnima = panchanga.tithiName === "पूर्णिमा";
-            const isAmavasya = panchanga.tithiName === "अमावस्या";
 
             const ariaLabel = `${date.toDateString()} ${events.length > 0 ? `(${events.length} events)` : ''}`;
 
@@ -99,22 +99,26 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({
                     <span className="sub-number">
                         {date.getDate()}
                     </span>
-                    {isPurnima && (
-                        <svg className="absolute top-1 left-1 sm:top-2 sm:left-2 w-3 h-3 sm:w-4 sm:h-4" viewBox="0 0 24 24" fill="none">
-                            <circle cx="12" cy="12" r="10" className="fill-yellow-400 dark:fill-yellow-300 stroke-yellow-600 dark:stroke-yellow-500" strokeWidth="1" />
-                        </svg>
-                    )}
-                    {isAmavasya && (
-                        <svg className="absolute top-1 left-1 sm:top-2 sm:left-2 w-3 h-3 sm:w-4 sm:h-4" viewBox="0 0 24 24" fill="none">
-                            <circle cx="12" cy="12" r="10" className="fill-gray-800 dark:fill-gray-600 stroke-gray-900 dark:stroke-gray-500" strokeWidth="1" />
-                        </svg>
-                    )}
+                    {isPurnima && <div className="purnima-dot"></div>}
+                    {isEkadashi && <div className="ekadashi-dot"></div>}
                     <span className={tithiClass} style={{ fontFamily: "'Noto Sans Devanagari', sans-serif" }}>
                         {panchanga.tithiName}
                     </span>
                     {events.length > 0 && <div className="event-dot" />}
                 </div>
             );
+        }
+
+        // Fill remaining cells
+        const totalCells = cells.length;
+        const remainder = totalCells % 7;
+        if (remainder !== 0) {
+            const extraCells = 7 - remainder;
+            for (let i = 0; i < extraCells; i++) {
+                cells.push(
+                    <div key={`empty-end-${i}`} className="calendar-day empty-cell" />
+                );
+            }
         }
 
         return cells;
@@ -128,7 +132,7 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({
         // Empty cells at the beginning
         for (let i = 0; i < firstDay.getUTCDay(); i++) {
             cells.push(
-                <div key={`empty-${i}`} className="h-full bg-transparent" />
+                <div key={`empty-start-${i}`} className="calendar-day empty-cell" />
             );
         }
 
@@ -148,23 +152,23 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({
             const panchanga = _getPanchangaBasics(date);
             const events = batchedEvents.get(day - 1) || [];
 
+            const isPurnima = panchanga.tithiName === "पूर्णिमा";
+            const isAmavasya = panchanga.tithiName === "अमावस्या";
+            const isEkadashi = panchanga.tithiName === "एकादशी";
+
             let classes = 'calendar-day focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400';
             if (date.getUTCDay() === 6) classes += ' saturday';
             if (date.toDateString() === today.toDateString()) classes += ' today';
+            if (isAmavasya) classes += ' amavasya';
             
             const isHoliday = events.some(event => event.holiday);
             if (isHoliday) classes += ' holiday';
 
             let tithiClass = 'tithi-display';
 
-            if (panchanga.tithiName === "पूर्णिमा") {
+            if (isPurnima) {
                 tithiClass += ' special purnima';
-            } else if (panchanga.tithiName === "अमावस्या") {
-                tithiClass += ' special amavasya';
             }
-
-            const isPurnima = panchanga.tithiName === "पूर्णिमा";
-            const isAmavasya = panchanga.tithiName === "अमावस्या";
 
             const ariaLabel = `${date.toDateString()} ${events.length > 0 ? `(${events.length} events)` : ''}`;
 
@@ -189,22 +193,26 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({
                     <span className="sub-number" style={{ fontFamily: "'Noto Sans Devanagari', sans-serif" }}>
                         {toDevanagari(bsDate.day)}
                     </span>
-                    {isPurnima && (
-                        <svg className="absolute top-1 left-1 sm:top-2 sm:left-2 w-3 h-3 sm:w-4 sm:h-4" viewBox="0 0 24 24" fill="none">
-                            <circle cx="12" cy="12" r="10" className="fill-yellow-400 dark:fill-yellow-300 stroke-yellow-600 dark:stroke-yellow-500" strokeWidth="1" />
-                        </svg>
-                    )}
-                    {isAmavasya && (
-                        <svg className="absolute top-1 left-1 sm:top-2 sm:left-2 w-3 h-3 sm:w-4 sm:h-4" viewBox="0 0 24 24" fill="none">
-                            <circle cx="12" cy="12" r="10" className="fill-gray-800 dark:fill-gray-600 stroke-gray-900 dark:stroke-gray-500" strokeWidth="1" />
-                        </svg>
-                    )}
+                    {isPurnima && <div className="purnima-dot"></div>}
+                    {isEkadashi && <div className="ekadashi-dot"></div>}
                     <span className={tithiClass} style={{ fontFamily: "'Noto Sans Devanagari', sans-serif" }}>
                         {panchanga.tithiName}
                     </span>
                     {events.length > 0 && <div className="event-dot" />}
                 </div>
             );
+        }
+
+        // Fill remaining cells
+        const totalCells = cells.length;
+        const remainder = totalCells % 7;
+        if (remainder !== 0) {
+            const extraCells = 7 - remainder;
+            for (let i = 0; i < extraCells; i++) {
+                cells.push(
+                    <div key={`empty-end-${i}`} className="calendar-day empty-cell" />
+                );
+            }
         }
 
         return cells;
@@ -228,7 +236,7 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({
             </div>
 
             {/* Calendar Grid */}
-            <div className="grid grid-cols-7 gap-0 flex-1 border-t border-l border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-sm" style={{ gridAutoRows: '1fr' }}>
+            <div className="grid grid-cols-7 gap-[2px] flex-1 bg-gray-200 dark:bg-gray-700 p-[2px] rounded-lg overflow-hidden shadow-sm" style={{ gridAutoRows: '1fr' }}>
                 {activeSystem === 'bs' ? renderBikramSambatCalendar() : renderGregorianCalendar()}
             </div>
         </div>
