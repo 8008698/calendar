@@ -4,18 +4,11 @@
 
 .calendar-day {
   @apply relative bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded cursor-pointer transition-colors duration-200 hover:bg-gray-50 dark:hover:bg-gray-700 overflow-hidden;
+  aspect-ratio: 1 / 1;
   display: grid;
   grid-template-rows: auto 1fr auto;
   grid-template-columns: 1fr;
   padding: 2px;
-  min-height: 44px;
-}
-
-@media (min-width: 480px) {
-  .calendar-day {
-    aspect-ratio: 1 / 1;
-    min-height: unset;
-  }
 }
 
 @media (min-width: 640px) {
@@ -59,25 +52,25 @@
 }
 
 .main-number {
-  @apply text-base sm:text-xl md:text-2xl font-bold text-gray-800 dark:text-gray-100 flex justify-center items-center;
+  @apply text-sm sm:text-lg md:text-2xl font-bold text-gray-800 dark:text-gray-100 flex justify-center items-center;
   grid-row: 2;
   grid-column: 1;
 }
 
 .sub-number {
-  @apply text-[8px] sm:text-[9px] md:text-[11px] text-gray-500 dark:text-gray-400 font-normal text-right pr-[2px] pt-[2px] leading-none;
+  @apply text-[7px] sm:text-[9px] md:text-[11px] text-gray-500 dark:text-gray-400 font-normal text-right pr-[2px] pt-[2px] leading-none;
   grid-row: 1;
   grid-column: 1;
 }
 
 .tithi-display {
-  @apply text-[7px] sm:text-[8px] md:text-[9px] text-blue-600 dark:text-blue-400 font-medium text-left pl-[2px] pb-[2px] leading-none truncate self-end;
+  @apply text-[6px] sm:text-[8px] md:text-[9px] text-blue-600 dark:text-blue-400 font-medium text-left pl-[2px] pb-[2px] leading-none truncate self-end;
   display: none;
   grid-row: 3;
   grid-column: 1;
 }
 
-@media (min-width: 400px) {
+@media (min-width: 600px) {
   .tithi-display {
     display: block;
   }

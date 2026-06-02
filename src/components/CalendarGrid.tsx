@@ -219,13 +219,13 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({
     };
 
     return (
-        <div className="h-full flex flex-col p-2 sm:p-4">
+        <div className="h-full flex flex-col p-1 sm:p-2 md:p-4">
             {/* Weekdays Header */}
-            <div className="grid grid-cols-7 gap-0 mb-1 sm:mb-2 flex-shrink-0">
+            <div className="grid grid-cols-7 gap-0 mb-0.5 sm:mb-1 md:mb-2 flex-shrink-0">
                 {weekdays.map((day, index) => (
                     <div
                         key={day}
-                        className={`weekday text-xs sm:text-sm py-1 sm:py-2 ${
+                        className={`weekday text-[10px] sm:text-xs md:text-sm py-0.5 sm:py-1 md:py-2 ${
                             index === 6 ? 'text-red-500 font-semibold' : 'text-gray-600 dark:text-gray-300'
                         }`}
                         style={activeSystem === 'bs' ? { fontFamily: "'Noto Sans Devanagari', sans-serif" } : {}}
@@ -236,7 +236,7 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({
             </div>
 
             {/* Calendar Grid */}
-            <div className="grid grid-cols-7 gap-[2px] flex-1 bg-gray-200 dark:bg-gray-700 p-[2px] rounded-lg overflow-hidden shadow-sm" style={{ gridAutoRows: '1fr' }}>
+            <div className="grid grid-cols-7 gap-0.5 sm:gap-1 flex-1 bg-gray-200 dark:bg-gray-700 p-0.5 sm:p-1 rounded-lg overflow-hidden shadow-sm" style={{ gridAutoRows: '1fr' }}>
                 {activeSystem === 'bs' ? renderBikramSambatCalendar() : renderGregorianCalendar()}
             </div>
         </div>
