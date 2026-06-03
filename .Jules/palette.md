@@ -5,3 +5,6 @@
 **Action:** Always add `role="button"`, `tabIndex={0}`, `onKeyDown` (for Enter/Space), `aria-label` (for context), and `focus-visible` utility classes to custom interactive components to ensure full a11y compliance.
 ## 2024-05-30 - Mobile Responsive Calendar Day\n**Learning:** Calendar cell layouts often break on smaller mobile screens if font sizes and paddings are not explicitly scaled down.\n**Action:** Use CSS grid for cell internal layouts, and use Tailwind responsive prefixes (`sm:`) or media queries to ensure  and  fit correctly without clipping on devices below 640px.
 ## 2024-05-30 - Mobile Responsive Calendar Day\n**Learning:** Calendar cell layouts often break on smaller mobile screens if font sizes and paddings are not explicitly scaled down.\n**Action:** Use CSS grid for cell internal layouts, and use responsive prefixes to ensure text fits correctly without clipping on devices below 640px.
+## 2026-06-03 - Focus Rings and ARIA Hidden in Header/Controls
+**Learning:** Calendar control buttons and inputs lacked keyboard navigation focus rings, and decorative icons in icon-only buttons were not hidden from screen readers.
+**Action:** Add `focus-visible:ring-2` utility classes to all interactive components for keyboard accessibility, and ensure all decorative icons within buttons use `aria-hidden="true"`.
