@@ -50,17 +50,17 @@ const CalendarControls: React.FC<CalendarControlsProps> = ({
                     onClick={onPrevYear}
                     aria-label="Previous year"
                     title="Previous year"
-                    className="p-2 rounded-lg transition-colors duration-200 text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
+                    className="p-2 rounded-lg transition-colors duration-200 text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400"
                 >
-                    <ChevronLeft size={20} />
+                    <ChevronLeft size={20} aria-hidden="true" />
                 </button>
                 <button
                     onClick={onPrevMonth}
                     aria-label="Previous month"
                     title="Previous month"
-                    className="p-2 rounded-lg transition-colors duration-200 text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
+                    className="p-2 rounded-lg transition-colors duration-200 text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400"
                 >
-                    <ChevronLeft size={20} />
+                    <ChevronLeft size={20} aria-hidden="true" />
                 </button>
             </div>
 
@@ -69,7 +69,7 @@ const CalendarControls: React.FC<CalendarControlsProps> = ({
                     value={currentMonth}
                     onChange={(e) => onMonthChange(parseInt(e.target.value))}
                     aria-label="Select month"
-                    className="px-2 py-1 bg-transparent border-none focus:ring-0 text-lg sm:text-xl font-semibold text-gray-900 dark:text-white cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-colors"
+                    className="px-2 py-1 bg-transparent border-none focus:ring-0 focus-visible:ring-2 focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400 text-lg sm:text-xl font-semibold text-gray-900 dark:text-white cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-colors"
                     style={activeSystem === 'bs' ? { fontFamily: "'Noto Sans Devanagari', sans-serif" } : {}}
                 >
                     {months.map((month, index) => (
@@ -84,7 +84,7 @@ const CalendarControls: React.FC<CalendarControlsProps> = ({
                     value={activeSystem === 'bs' ? toDevanagari(currentYear) : currentYear}
                     onChange={handleYearInputChange}
                     aria-label="Enter year"
-                    className="w-20 px-2 py-1 text-center bg-transparent border-none focus:ring-0 text-lg sm:text-xl font-semibold text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-colors"
+                    className="w-20 px-2 py-1 text-center bg-transparent border-none focus:ring-0 focus-visible:ring-2 focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400 text-lg sm:text-xl font-semibold text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-colors"
                     style={activeSystem === 'bs' ? { fontFamily: "'Noto Sans Devanagari', sans-serif" } : {}}
                     min={activeSystem === 'bs' ? 2000 : 1944}
                     max={activeSystem === 'bs' ? 2089 : 2043}
@@ -96,17 +96,17 @@ const CalendarControls: React.FC<CalendarControlsProps> = ({
                     onClick={onNextMonth}
                     aria-label="Next month"
                     title="Next month"
-                    className="p-2 rounded-lg transition-colors duration-200 text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
+                    className="p-2 rounded-lg transition-colors duration-200 text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400"
                 >
-                    <ChevronRight size={20} />
+                    <ChevronRight size={20} aria-hidden="true" />
                 </button>
                 <button
                     onClick={onNextYear}
                     aria-label="Next year"
                     title="Next year"
-                    className="p-2 rounded-lg transition-colors duration-200 text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
+                    className="p-2 rounded-lg transition-colors duration-200 text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400"
                 >
-                    <ChevronRight size={20} />
+                    <ChevronRight size={20} aria-hidden="true" />
                 </button>
             </div>
         </div>
