@@ -23,7 +23,7 @@ const CalendarHeader: React.FC<CalendarHeaderProps> = ({
             <div className="flex items-center gap-3">
                 <div className="flex bg-white dark:bg-gray-800 rounded-lg p-1 shadow-sm border border-gray-200 dark:border-gray-700">
                     <button
-                        className={`px-4 py-2 rounded-md transition-colors duration-200 ${
+                        className={`px-4 py-2 rounded-md transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400 ${
                             activeSystem === 'bs'
                                 ? 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white font-semibold'
                                 : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'
@@ -34,7 +34,7 @@ const CalendarHeader: React.FC<CalendarHeaderProps> = ({
                         <span className="md:hidden">BS</span>
                     </button>
                     <button
-                        className={`px-4 py-2 rounded-md transition-colors duration-200 ${
+                        className={`px-4 py-2 rounded-md transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400 ${
                             activeSystem === 'ad'
                                 ? 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white font-semibold'
                                 : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'
@@ -49,7 +49,7 @@ const CalendarHeader: React.FC<CalendarHeaderProps> = ({
                 <button
                     onClick={onTodayClick}
                     aria-label="Go to today"
-                    className="px-4 py-2 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200 font-medium text-sm sm:text-base"
+                    className="px-4 py-2 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200 font-medium text-sm sm:text-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400"
                     style={{ fontFamily: "'Noto Sans Devanagari', sans-serif" }}
                 >
                     आज
@@ -61,17 +61,17 @@ const CalendarHeader: React.FC<CalendarHeaderProps> = ({
                     onClick={onMenuClick}
                     aria-label="Open menu"
                     title="Open menu"
-                    className="p-2.5 rounded-lg bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 shadow-sm border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
+                    className="p-2.5 rounded-lg bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 shadow-sm border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400"
                 >
-                    <Menu size={18} />
+                    <Menu size={18} aria-hidden="true" />
                 </button>
                 <button
                     onClick={onThemeToggle}
                     aria-label={theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme'}
                     title={theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme'}
-                    className="p-2.5 rounded-lg bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 shadow-sm border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
+                    className="p-2.5 rounded-lg bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 shadow-sm border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400"
                 >
-                    {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
+                    {theme === 'light' ? <Moon size={18} aria-hidden="true" /> : <Sun size={18} aria-hidden="true" />}
                 </button>
             </div>
         </header>
