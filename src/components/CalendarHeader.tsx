@@ -61,17 +61,17 @@ const CalendarHeader: React.FC<CalendarHeaderProps> = ({
                     onClick={onMenuClick}
                     aria-label="Open menu"
                     title="Open menu"
-                    className="p-2.5 rounded-lg bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 shadow-sm border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
+                    className="p-2.5 rounded-lg bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 shadow-sm border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400"
                 >
-                    <Menu size={18} />
+                    <Menu size={18} aria-hidden="true" />
                 </button>
                 <button
                     onClick={onThemeToggle}
                     aria-label={theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme'}
                     title={theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme'}
-                    className="p-2.5 rounded-lg bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 shadow-sm border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
+                    className="p-2.5 rounded-lg bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 shadow-sm border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400"
                 >
-                    {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
+                    {theme === 'light' ? <Moon size={18} aria-hidden="true" /> : <Sun size={18} aria-hidden="true" />}
                 </button>
             </div>
         </header>

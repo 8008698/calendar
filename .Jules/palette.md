@@ -1,7 +1,7 @@
-## 2024-03-20 - Modal Accessibility Pattern
-**Learning:** Found a recurring pattern of missing accessibility features in custom modal dialogs (specifically `DayDetailsModal` and `MobileMenu`). Missing features include: lack of `aria-label` for icon-only close buttons, screen readers parsing the icon itself (missing `aria-hidden="true"`), absent visible focus rings for keyboard navigation, and missing Escape key event listeners for keyboard dismissal.
-**Action:** When working on or creating custom modals/dialogs, always ensure close buttons have accessible names, icons are hidden from screen readers, visible focus styles (`focus-visible:ring-2`, etc.) are applied, and an `Escape` keydown event listener is attached (and properly cleaned up) to dismiss the dialog.## 2025-06-01 - Calendar Grid Keyboard Accessibility
-**Learning:** Interactive div elements (like calendar days) using onClick handlers lacked keyboard accessibility and screen reader context.
-**Action:** Always add `role="button"`, `tabIndex={0}`, `onKeyDown` (for Enter/Space), `aria-label` (for context), and `focus-visible` utility classes to custom interactive components to ensure full a11y compliance.
-## 2024-05-30 - Mobile Responsive Calendar Day\n**Learning:** Calendar cell layouts often break on smaller mobile screens if font sizes and paddings are not explicitly scaled down.\n**Action:** Use CSS grid for cell internal layouts, and use Tailwind responsive prefixes (`sm:`) or media queries to ensure  and  fit correctly without clipping on devices below 640px.
-## 2024-05-30 - Mobile Responsive Calendar Day\n**Learning:** Calendar cell layouts often break on smaller mobile screens if font sizes and paddings are not explicitly scaled down.\n**Action:** Use CSS grid for cell internal layouts, and use responsive prefixes to ensure text fits correctly without clipping on devices below 640px.
+## 2026-06-09 - Focus Ring Accessibility Fix
+**Learning:** Tailwind's `focus:ring-0` removes default focus styling but does not automatically add an accessible replacement unless `focus-visible` is used, creating keyboard navigation traps.
+**Action:** Use `focus-visible:outline-none focus-visible:ring-2` for custom interactive elements to ensure visual focus indicators are present for keyboard users while retaining clean look on click.
+
+## 2026-06-09 - Focus Ring Accessibility Fix
+**Learning:** Tailwind's `focus:ring-0` removes default focus styling but does not automatically add an accessible replacement unless `focus-visible` is used, creating keyboard navigation traps.
+**Action:** Use `focus-visible:outline-none focus-visible:ring-2` for custom interactive elements to ensure visual focus indicators are present for keyboard users while retaining clean look on click.
