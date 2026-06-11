@@ -5,3 +5,7 @@
 **Action:** Always add `role="button"`, `tabIndex={0}`, `onKeyDown` (for Enter/Space), `aria-label` (for context), and `focus-visible` utility classes to custom interactive components to ensure full a11y compliance.
 ## 2024-05-30 - Mobile Responsive Calendar Day\n**Learning:** Calendar cell layouts often break on smaller mobile screens if font sizes and paddings are not explicitly scaled down.\n**Action:** Use CSS grid for cell internal layouts, and use Tailwind responsive prefixes (`sm:`) or media queries to ensure  and  fit correctly without clipping on devices below 640px.
 ## 2024-05-30 - Mobile Responsive Calendar Day\n**Learning:** Calendar cell layouts often break on smaller mobile screens if font sizes and paddings are not explicitly scaled down.\n**Action:** Use CSS grid for cell internal layouts, and use responsive prefixes to ensure text fits correctly without clipping on devices below 640px.
+
+## 2026-06-11 - Focus Ring Keyboard Accessibility Trap
+**Learning:** Removing default focus rings using `focus:ring-0` or `outline-none` on interactive elements like `<select>` and `<input>` creates a keyboard accessibility trap by removing visual focus indicators.
+**Action:** Whenever removing default focus rings, always provide an explicit `focus-visible` alternative (e.g., `focus-visible:ring-2`) to ensure keyboard users can still see what is focused.
